@@ -1,0 +1,14 @@
+name: Workflow A
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  integration_tests-tcc:
+    uses: gladykov/TestRepo/.github/workflows/workflow_b.yml@main
+    secrets: inherit
