@@ -10,6 +10,5 @@ on:
 
 jobs:
   integration_tests-tcc:
-    name: Name for workflow A
     uses: ./.github/workflows/workflow_b.yml@main
     secrets: inherit
