@@ -10,5 +10,5 @@ on:
 
 jobs:
   integration_tests-tcc:
-    uses: gladykov/TestRepo2/workflow_b.yml@main
+    uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
     secrets: inherit
