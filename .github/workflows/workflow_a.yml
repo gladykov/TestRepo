@@ -25,7 +25,7 @@ jobs:
     needs: [ Jobs-B, integration_tests-tcc ]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     runs-on: ubuntu-latest
-    name: what happened
+    name: what failed happened
     steps:
       - name: notiFyFail
         run: echo "failed"
@@ -34,8 +34,8 @@ jobs:
     needs: [ Jobs-B, integration_tests-tcc ]
     if: ${{ always() && !contains(needs.*.result, 'failure') }}
     runs-on: ubuntu-latest
-    name: what happened
+    name: what passed happened
     steps:
-      - name: notiFyFail
+      - name: notiFyPass
         run: echo "passed"
 
