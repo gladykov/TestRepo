@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TestRepo.iml" filepath="$PROJECT_DIR$/.idea/TestRepo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../e2e-tests-confluence-cloud/.idea/e2e-tests-confluence-cloud.iml" filepath="$PROJECT_DIR$/../e2e-tests-confluence-cloud/.idea/e2e-tests-confluence-cloud.iml" />
     </modules>
   </component>
 </project>
