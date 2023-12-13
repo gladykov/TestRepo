@@ -3,9 +3,8 @@ import path from 'path';
 
 console.log("I;m here")
 
-const backupPath = process.env.BACKUP_PATH;
-console.log(backupPath)
-
+console.log(process.argv)
+const backupPath = process.argv[2]
 const backupsToKeep = 3
 
 function getSortedFiles (dir) {
