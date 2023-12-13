@@ -24,7 +24,7 @@ function removeBackups(files) {
         const fileToRemove = files[files.length-1]
         console.log("Will remove")
         console.log(path.join(backupPath, fileToRemove))
-        // fs.unlinkSync(path.join(backupPath, fileToRemove))
+        fs.unlinkSync(path.join(backupPath, fileToRemove))
         files.pop()
     }
 }
