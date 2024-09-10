@@ -18,6 +18,6 @@ jobs:
           npm install @actions/github
       - name: Run script
         id: script
-        run: /usr/bin/nodejs --loader ts-node/esm ./script.ts
+        run: node --loader ts-node/esm ./script.ts
       - name: Show result
         run: echo ${{ steps.script.outputs.gotor }}
