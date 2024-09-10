@@ -9,33 +9,6 @@ on:
   workflow_call:
 
 jobs:
-  Jobs-B:
-    name: Job B
-    runs-on: ubuntu-latest
-    steps:
-      - name: Hello World B from TestRepo2
-        run: echo "Hello World B"
-
   integration_tests-tcc:
-    needs: Jobs-B
     uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
     secrets: inherit
-
-  tellMeWeFailed:
-    needs: [ Jobs-B, integration_tests-tcc ]
-    if: ${{ always() && contains(needs.*.result, 'failure') }}
-    runs-on: ubuntu-latest
-    name: what failed happened
-    steps:
-      - name: notiFyFail
-        run: echo "failed"
-
-  tellMeWePassed:
-    needs: [ Jobs-B, integration_tests-tcc ]
-    if: ${{ always() && !contains(needs.*.result, 'failure') }}
-    runs-on: ubuntu-latest
-    name: what passed happened
-    steps:
-      - name: notiFyPass
-        run: echo "passed"
-
