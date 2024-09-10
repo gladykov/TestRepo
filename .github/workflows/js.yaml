@@ -1,0 +1,23 @@
+name: Execute JS
+on:
+  workflow_dispatch:
+
+jobs:
+  cleanup-staging:
+    name: Cleanup staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+            node-version: 'lts/hydrogen'
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install code quality packages
+        run: |
+          npm install @actions/core
+          npm install @actions/github
+      - name: Run script
+        id: script
+        run: /usr/bin/node --loader ts-node/esm ./script.ts
+      - name: Show result
+        run: echo ${{ steps.script.outputs.gotor }}
