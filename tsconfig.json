@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "moduleResolution": "Node",
+    "target": "esnext",
+      "esModuleInterop": true,
+
+    "lib": [
+      "ES2021.String",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true
+  }
+}
