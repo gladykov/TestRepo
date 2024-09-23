@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Check branch name
       shell: bash
-      run: pwd && ls -la
+      run: cd common && pwd && ls -la
