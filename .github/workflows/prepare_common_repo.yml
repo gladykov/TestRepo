@@ -4,12 +4,9 @@ description: 'Action to checkout common repo'
 runs:
   using: "composite"
   steps:
-    - name: Check out repository code
-      uses: actions/checkout@v4
-      repository: gladykov/TestRepo
-      path: common
     - name: Check branch name
       run: |
         rm -rf ./.git
+        npm ci
         node --loader ts-node/esm ./checkBranchName.ts
       workdir: common
