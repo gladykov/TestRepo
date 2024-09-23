@@ -4,8 +4,6 @@ description: 'Action to checkout common repo'
 runs:
   using: "composite"
   steps:
-    - name: Im compo
-      run: echo "Im compo"
     - name: Check branch name
       shell: bash
       run: pwd && ls -la
