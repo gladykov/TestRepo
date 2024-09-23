@@ -7,8 +7,5 @@ runs:
     - name: Im compo
       run: echo "Im compo"
     - name: Check branch name
-      run: |
-        rm -rf ./.git
-        npm ci
-        node --loader ts-node/esm ./checkBranchName.ts
-      workdir: common
+      shell: bash
+      run: pwd && ls -la
