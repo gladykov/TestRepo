@@ -4,6 +4,6 @@ description: 'Action to checkout common repo'
 runs:
   using: "composite"
   steps:
-    - name: Check branch name
+    - name: Install TSX globally
       shell: bash
-      run: cd common && pwd && ls -la && npm install && rm -rf ./.git && tsx ./checkBranchName.ts
+      run: npm install -g tsx
