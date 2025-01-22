@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Hello World B from TestRepo2
         run: echo "Hello World B"
+      - name: Dump GitHub context A
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
   integration_tests-tcc:
     needs: Jobs-B
