@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Check branch name
       shell: bash
-      run: cd common && pwd && ls -la && npm install && rm -rf ./.git && node --loader ts-node/esm ./check-branch-name.ts
+      run: cd common && npm install && rm -rf ./.git && node --loader ts-node/esm ./check-branch-name.ts
