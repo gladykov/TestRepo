@@ -13,7 +13,7 @@ jobs:
     name: Job B
     runs-on: ubuntu-latest
     steps:
-      - name: Hello World B from TestRepo2
+      - name: Hello World A from TestRepo
         run: echo "Hello World B"
       - name: Dump GitHub context A
         env:
