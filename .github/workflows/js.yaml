@@ -2,8 +2,7 @@ name: Workflow A
 on:
   pull_request:
     branches:
-      - develop
-      - master
+      - main
     types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
   workflow_call:
