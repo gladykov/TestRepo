@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # pin@v4
+        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # pin@v4
         if: ${{(github.event_name == 'pull_request' && github.base_ref == 'main' && always()) || (github.event_name == 'push' && always()) || (github.event_name == 'workflow_dispatch' && always())}}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
