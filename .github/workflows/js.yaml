@@ -17,7 +17,7 @@ jobs:
           reporter: jest-junit
           #           max-annotations: '0'  # https://github.com/dorny/test-reporter/issues/131
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@884b79409bbd464b2a59edc326a4b77dc56b2195 # pin@v3
+        uses: SonarSource/sonarqube-scan-action@bfd4e558cda28cda6b5defafb9232d191be8c203 # pin@v3
         if: ${{(github.event_name == 'pull_request' && github.base_ref == 'main' && always()) || (github.event_name == 'push' && always()) || (github.event_name == 'workflow_dispatch' && always())}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
