@@ -1,10 +1,5 @@
 name: Workflow A
 on:
-  pull_request:
-    branches:
-      - develop
-      - master
-    types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
   workflow_call:
 
@@ -19,8 +14,34 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+          - name: Publish MMC unit test report
+            uses: dorny/test-reporter@v1
+            if: success() || failure()
+            with:
+              name: MMC unit tests report
+              path: mmc/junit.xml
+              reporter: jest-junit
+          #           max-annotations: '0'  # https://github.com/dorny/test-reporter/issues/131
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v3
+        if: ${{(github.event_name == 'pull_request' && github.base_ref == 'main' && always()) || (github.event_name == 'push' && always()) || (github.event_name == 'workflow_dispatch' && always())}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      -   name: Upload coverage to codecov
+          uses: codecov/codecov-action@v4
+          if: ${{(github.event_name == 'pull_request' && github.base_ref == 'main' && always()) || (github.event_name == 'push' && always()) || (github.event_name == 'workflow_dispatch' && always())}}
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Check if there are changes to files
+        uses: tj-actions/verify-changed-files@v18
+        id: verify-changed-files
+        with:
+          read-gitignore: true
 
-  integration_tests-tcc:
-    needs: Jobs-B
-    uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
-    secrets: inherit
+
+#
+#  integration_tests-tcc:
+#    needs: Jobs-B
+#    uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
+#    secrets: inherit
