@@ -34,7 +34,7 @@ jobs:
           read-gitignore: true
       - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
-        uses: devops-infra/action-pull-request@e66e2ba93519dc63b9884a26e620e2fd0cffab2c # pin@v0.5.5
+        uses: devops-infra/action-pull-request@ff118b4a7c24bac5a3c95acef59e9edd1fc37890 # pin@v0.6.0
         with:
           github_token: ${{ secrets.PAT }}
           source_branch: ${{ env.BRANCH_NAME }}
