@@ -6,8 +6,8 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
   workflow_call:
-  schedule:
-    - cron: '*/10 * * * *'
+#  schedule:
+#    - cron: '*/10 * * * *'
 
 jobs:
   Jobs-B:
