@@ -10,7 +10,14 @@ on:
 #    - cron: '*/10 * * * *'
 
 jobs:
-  Jobs-B:
-    name: Job B
-    uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
-    secrets: inherit
+  integration-tests:
+    name: Integration tests
+    runs-on:
+      labels: ${{ inputs.testRunner }}
+    steps:
+      - name: Push results to Test Results Analyzer
+        # Collect only results from nightly runs
+        env:
+          CATEGORY: ${{ github.event_name }} - ${{ github.workspace }}
+        # We don't want to block pipelines during development phase, so always return 0
+        run: echo $category
