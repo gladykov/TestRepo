@@ -12,8 +12,7 @@ on:
 jobs:
   integration-tests:
     name: Integration tests
-    runs-on:
-      labels: ${{ inputs.testRunner }}
+    runs-on: ubuntu-latest
     steps:
       - name: Push results to Test Results Analyzer
         # Collect only results from nightly runs
