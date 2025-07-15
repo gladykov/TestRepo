@@ -20,13 +20,14 @@ jobs:
     if: ${{github.event_name == 'pull_request' && github.base_ref == 'production'}}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4 
       - name: Wait on workflow
         env:
           WORKFLOW: 'deploy.yml'
           REPOSITORY: ${{ github.repository }}
           INTERVAL: 30
           TIMEOUT: 30
-        run: chmod +x .github/wait-for-deployment.sh && .github/wait-for-deployment.sh
+        run: github/wait-for-deployment.sh
   
   
   integration_tests-mmc:
