@@ -1,0 +1,20 @@
+name: Deploy to staging
+
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+  checks: write
+
+jobs:
+  build:
+    environment: Staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack when deployment begins
+        run: echo 'we did it'

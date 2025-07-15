@@ -1,16 +1,35 @@
-name: Workflow A
+name: Integration tests MMC
+
 on:
-  pull_request:
-    branches:
-      - main
-    types: [opened, synchronize, reopened]
+  schedule:
+    # Run the tests at 12:23 AM everyday
+    - cron: '23 0 * * *'
   workflow_dispatch:
-  workflow_call:
-#  schedule:
-#    - cron: '*/10 * * * *'
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - production
+
+permissions:
+  contents: read
+  checks: write
 
 jobs:
-  Jobs-B:
-    name: Job B
-    uses: gladykov/TestRepo2/.github/workflows/workflow_b.yml@main
-    secrets: inherit
+  wait_for_staging_deployment:
+    name: Wait for staging deployment
+    if: ${{github.event_name == 'pull_request' && github.base_ref == 'production'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait on workflow
+        uses: lucasssvaz/wait-on-workflow@676745e30db420704878817812d34d95e20a183d # 
+        with:
+          workflow: 'deploy.yml'
+  
+  
+  integration_tests-mmc:
+    if: ${{ always() && (needs.wait_for_staging_deployment.result == 'success' || needs.wait_for_staging_deployment.result == 'skipped') }}
+    needs: wait_for_staging_deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Finished wait
+        run: echo 'i finished waiting here'
