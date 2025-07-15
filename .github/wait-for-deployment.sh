@@ -22,14 +22,14 @@ fi
 
   while true; do
 
-    response=$(gh run list --repo "${repository_name}" --commit="${sha}" --workflow="${workflow_name}" --status=success)
+    response=$(gh run list --repo "${repository_name}" --commit="${sha}" --workflow="${workflow_name}" --status=success --json=status | jq length)
     
     echo "$response"
     
     if echo "$response" | grep -q "set the GH_TOKEN"; then
       echo "GH_TOKEN env var not set"
       exit 1
-    elif ! echo "$response" | grep -q "no runs found"; then
+    elif [ "$response" != "0" ]; then
       echo "🎉 Workflow ${workflow_name} finished for ${sha}"
       break
     fi

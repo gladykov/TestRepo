@@ -28,6 +28,7 @@ jobs:
           INTERVAL: 30
           TIMEOUT: 30
           SHA: ${{ github.event.pull_request.head.sha }}
+          GH_TOKEN: ${{ github.token }}
         run: .github/wait-for-deployment.sh
   
   
