@@ -5,6 +5,7 @@ timeout="${TIMEOUT}"
 interval="${INTERVAL}"
 workflow_name="${WORKFLOW}"
 repository_name="${REPOSITORY}"
+sha="${SHA}"
 counter=0
 
 if [[ ! "$SHA" =~ ^[0-9a-f]{40}$ ]]; then
@@ -15,13 +16,13 @@ fi
 echo "ℹ️ Inputs:"
 echo "ℹ️   Repository: ${repository_name}"
 echo "ℹ️   Workflow file name: ${workflow_name}"
-echo "ℹ️   Commit SHA: ${SHA}"
+echo "ℹ️   Commit SHA: ${sha}"
 echo "ℹ️   Timeout for the workflow to complete: ${timeout} minutes"
 echo "ℹ️   Interval between checks: ${interval} seconds"
 
   while true; do
 
-    response=$(gh run list --repo "${repository_name}" --commit="${SHA}" --workflow="${workflow_name}" --status=success)
+    response=$(gh run list --repo "${repository_name}" --commit="${sha}" --workflow="${workflow_name}" --status=success)
     
     echo "$response"
     
@@ -32,7 +33,7 @@ echo "ℹ️   Interval between checks: ${interval} seconds"
       echo "❌ Invalid input provided (repository or workflow ID). Please check your inputs."
       exit 1
     elif ! echo "$response" | grep -q "no runs found"; then
-      echo "🎉 Workflow ${workflow_name} finished for ${SHA}"
+      echo "🎉 Workflow ${workflow_name} finished for ${sha}"
       break
     fi
 

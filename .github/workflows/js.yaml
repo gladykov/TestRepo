@@ -27,6 +27,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           INTERVAL: 30
           TIMEOUT: 30
+          SHA: ${{ github.event.pull_request.head.sha }}
         run: .github/wait-for-deployment.sh
   
   
