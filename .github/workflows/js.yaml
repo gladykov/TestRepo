@@ -21,9 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait on workflow
-        uses: lucasssvaz/wait-on-workflow@676745e30db420704878817812d34d95e20a183d # 
-        with:
-          workflow: 'deploy.yml'
+        env:
+          WORKFLOW: 'deploy.yml'
+          REPOSITORY: ${{ github.repository }}
+          INTERVAL: 30
+          TIMEOUT: 30
+        run: ./workflows/wait-for-deployment.sh
   
   
   integration_tests-mmc:
