@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4 
-      - name: Wait on workflow
+      - name: Wait for staging deployment
         env:
           WORKFLOW: 'deploy.yml'
           REPOSITORY: ${{ github.repository }}

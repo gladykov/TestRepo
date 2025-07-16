@@ -17,4 +17,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify Slack when deployment begins
-        run: echo 'we did it'
+        run: sleep 45 && echo 'we did it'
