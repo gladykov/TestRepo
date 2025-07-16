@@ -20,10 +20,16 @@ jobs:
     if: ${{github.event_name == 'pull_request' && github.base_ref == 'production'}}
     runs-on: ubuntu-latest
     steps:
-      - name: Wait on workflow
-        uses: lucasssvaz/wait-on-workflow@676745e30db420704878817812d34d95e20a183d # 
-        with:
-          workflow: 'deploy.yml'
+      - uses: actions/checkout@v4 
+      - name: Wait for staging deployment
+        env:
+          WORKFLOW: 'deploy.yml'
+          REPOSITORY: ${{ github.repository }}
+          INTERVAL: 30
+          TIMEOUT: 30
+          SHA: ${{ github.event.pull_request.head.sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: .github/wait-for-deployment.sh
   
   
   integration_tests-mmc:
