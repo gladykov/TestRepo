@@ -22,14 +22,15 @@ fi
 
   while true; do
 
-    response=$(gh run list --repo "${repository_name}" --commit="${sha}" --workflow="${workflow_name}" --status=success --json=status | jq length)
+    response=$(gh run list --repo "${repository_name}" --commit="${sha}" --workflow="${workflow_name}" --status=success --json=status 2>gh_error.log | jq length)
     
-    echo "$response"
-    
-    if echo "$response" | grep -q "set the GH_TOKEN"; then
-      echo "GH_TOKEN env var not set"
+    if [ $? -ne 0 ]; then
+      echo "❌ Error executing 'gh run list'. Check the error log below:"
+      cat gh_error.log
       exit 1
-    elif [ "$response" != "0" ]; then
+    fi
+    
+    if [ "$response" != "0" ]; then
       echo "🎉 Workflow ${workflow_name} finished for ${sha}"
       break
     fi
